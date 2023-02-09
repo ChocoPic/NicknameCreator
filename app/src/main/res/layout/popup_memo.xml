@@ -2,9 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="300dp"
     android:layout_height="200dp"
-    android:orientation="vertical"
+    android:background="@color/colorWhite"
     android:focusable="true"
-    android:focusableInTouchMode="true">
+    android:focusableInTouchMode="true"
+    android:orientation="vertical">
 
     <Button
         android:id="@+id/close_btn"
@@ -17,14 +18,15 @@
         android:id="@+id/infoText"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:layout_marginBottom="10dp"
-        android:background="#FFFFFF"
+        android:background="@color/colorWhite"
         android:ems="10"
         android:gravity="center"
         android:hint="저장할 닉네임을 입력하세요!\n (최대 20개)"
         android:inputType="textPersonName"
-        android:textColor="#000000"
+        android:textColor="@color/colorNavy"
+        android:textColorHint="@color/colorGray"
         android:textSize="16sp" />
 
     <Button
@@ -33,7 +35,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center"
         android:layout_marginBottom="10dp"
-        android:background="@drawable/round_button_pressed"
+        android:background="@drawable/button_click_filled"
         android:text="저장"
+        android:textColor="@color/colorWhite"
         android:textSize="16sp" />
 </LinearLayout>

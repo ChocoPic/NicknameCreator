@@ -24,12 +24,16 @@ public class Activity2 extends AppCompatActivity
     EditText et_length;
     Button b_create;
     Button btn_memo;
+    TextView info_text;
+    Button info_btn;
     private Context context = this;
     private SQLHelper helper;
 
     static final int LEN = 5;
     char userInput[] = new char[LEN];
     String userInputString;
+    static int clicked = 0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +50,23 @@ public class Activity2 extends AppCompatActivity
         b_create = findViewById(R.id.button_create);
 
         btn_memo = findViewById(R.id.memo_btn);
+        info_text = (TextView) findViewById(R.id.info_textView);
+        info_btn = (Button) findViewById(R.id.info_button);
         helper = helper.getInst(context);
+
+        info_text.setVisibility(View.GONE);
+        info_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (clicked==0){
+                    info_text.setVisibility(View.VISIBLE);
+                    clicked = 1;
+                }else{
+                    info_text.setVisibility(View.GONE);
+                    clicked = 0;
+                }
+            }
+        });
 
         for(int i=0; i<TVS; i++){
             tvs[i] = (TextView)findViewById(TV_ids[i]);
@@ -91,7 +111,7 @@ public class Activity2 extends AppCompatActivity
                         try {
                             Integer len = Integer.parseInt("" + et_length.getText());
                             if ( len < 1 || len > 5)
-                                Toast.makeText(Activity2.this, "숫자를 제대로 입력해주세요ㅜ", Toast.LENGTH_LONG).show();
+                                Toast.makeText(Activity2.this, "1~5글자까지 가능합니다", Toast.LENGTH_LONG).show();
                             else {
                                 Toast.makeText(Activity2.this, "얍!", Toast.LENGTH_SHORT).show();
                                 int i;
@@ -100,7 +120,7 @@ public class Activity2 extends AppCompatActivity
                                 }
                             }
                         } catch (Exception e) {
-                            Toast.makeText(Activity2.this, "숫자를 읽을 수가 없어요ㅜ", Toast.LENGTH_LONG).show();
+                            Toast.makeText(Activity2.this, "숫자를 읽을 수가 없어요ㅠㅠ", Toast.LENGTH_LONG).show();
                         }
                     }
                 }catch (Exception e){
