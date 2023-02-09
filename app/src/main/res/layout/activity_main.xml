@@ -53,18 +53,6 @@
         android:padding="50dp">
 
         <Button
-            android:id="@+id/button_1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
-            android:layout_weight="1"
-            android:background="@drawable/button_click"
-            android:soundEffectsEnabled="true"
-            android:text="완전 랜덤"
-            android:textColor="@color/colorWhite"
-            android:textSize="16sp" />
-
-        <Button
             android:id="@+id/button_2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -72,7 +60,31 @@
             android:layout_weight="1"
             android:background="@drawable/button_click"
             android:soundEffectsEnabled="true"
-            android:text="부분 랜덤"
+            android:text="기본 랜덤"
+            android:textColor="@color/colorWhite"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/button_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:layout_weight="1"
+            android:background="@drawable/button_click"
+            android:soundEffectsEnabled="true"
+            android:text="한글닉 랜덤"
+            android:textColor="@color/colorWhite"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/button_3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:layout_weight="1"
+            android:background="@drawable/button_click"
+            android:soundEffectsEnabled="true"
+            android:text="외국닉 랜덤"
             android:textColor="@color/colorWhite"
             android:textSize="16sp" />
 
