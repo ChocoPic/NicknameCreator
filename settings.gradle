@@ -1,0 +1,2 @@
+rootProject.name='NicknameCreator'
+include ':app'

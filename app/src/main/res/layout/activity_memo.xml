@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#1C2442"
+    android:orientation="vertical"
+    android:padding="50dp">
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="30dp"
+        android:gravity="center"
+        android:text="길게 눌러 하나씩 삭제할 수 있어요 :)"
+        android:textColor="#DD86B6" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center|top"
+        android:foregroundGravity="center_horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|top"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/text_blank"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|top"
+                android:gravity="center|top"
+                android:hint="저장된 메모가 없어요!"
+                android:lineSpacingExtra="12sp"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#ABFFFFFF"
+                android:textSize="20dp" />
+
+            <Button
+                android:id="@+id/button_clear"
+                android:layout_width="100dp"
+                android:layout_height="25dp"
+                android:layout_gravity="right"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/round_button_pressed"
+                android:text="모두 지우기"
+                android:textColor="#FFFFFF"
+                android:textSize="16dp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/memo_list"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center_horizontal" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
