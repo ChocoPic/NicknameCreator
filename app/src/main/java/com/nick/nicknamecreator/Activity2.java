@@ -78,7 +78,7 @@ public class Activity2 extends AppCompatActivity
                     TextView tv = (TextView) v;
                     String value = tv.getText().toString();
                     helper.insertMemo(value);
-                    Toast.makeText(Activity2.this, "저장했습니다!", Toast.LENGTH_LONG).show();
+                    //Toast.makeText(Activity2.this, "저장했습니다!", Toast.LENGTH_LONG).show();
                     return true;
                 }
             });

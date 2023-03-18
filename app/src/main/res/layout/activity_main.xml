@@ -72,7 +72,7 @@
             android:layout_weight="1"
             android:background="@drawable/button_click"
             android:soundEffectsEnabled="true"
-            android:text="한글닉 랜덤"
+            android:text="순우리말 느낌 랜덤"
             android:textColor="@color/colorWhite"
             android:textSize="16sp" />
 
@@ -84,7 +84,7 @@
             android:layout_weight="1"
             android:background="@drawable/button_click"
             android:soundEffectsEnabled="true"
-            android:text="외국닉 랜덤"
+            android:text="외국어 느낌 랜덤"
             android:textColor="@color/colorWhite"
             android:textSize="16sp" />
 

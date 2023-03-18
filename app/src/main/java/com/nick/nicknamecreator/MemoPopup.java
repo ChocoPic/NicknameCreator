@@ -34,9 +34,10 @@ public class MemoPopup extends Activity {
         save_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Toast.makeText(MemoPopup.this, "저장했습니다!", Toast.LENGTH_SHORT).show();
                 String value = text_nick.getText().toString();
                 helper.insertMemo(value);
-                Toast.makeText(MemoPopup.this, "저장했습니다!", Toast.LENGTH_LONG).show();
+                finish();
             }
         });
         close_btn.setOnClickListener(new View.OnClickListener() {

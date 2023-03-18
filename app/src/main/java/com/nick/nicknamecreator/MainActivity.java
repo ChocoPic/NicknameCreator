@@ -60,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
 
         Button btn1 = (Button) findViewById(R.id.button_1);
         Button btn2 = (Button) findViewById(R.id.button_2);
+        Button btn3 = (Button) findViewById(R.id.button_3);
         Button btn_memoPage = (Button) findViewById(R.id.memo_btn);
 
         btn1.setOnClickListener(new View.OnClickListener() {
@@ -78,21 +79,27 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        btn3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), Activity3.class);
+                startActivity(intent);
+            }
+        });
+
         btn_memoPage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showInterstitial();
             }
         });
-//        Intent intent = new Intent(getApplicationContext(), ActivityMemo.class);
-//        startActivity(intent);
     }
 
     // 광고 불러오는 함수
     private void loadAd(){
         AdRequest adRequest = new AdRequest.Builder().build();
         InterstitialAd.load(this,
-                getString(R.string.admob_test),         //테스트 광고 로드해보기
+                getString(R.string.admob_ad_unit_id),         //테스트 광고 admob_test 로드해보기
                 adRequest,
                 new InterstitialAdLoadCallback() {
 
@@ -118,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
             mAd.setFullScreenContentCallback(new FullScreenContentCallback() {
                 @Override
                 public void onAdDismissedFullScreenContent() {
-                    Log.d("광고", "광고 dismissed");
+                    Log.d("광고", "광고닫힘");
                     Intent intent = new Intent(getApplicationContext(), ActivityMemo.class);
                     startActivity(intent);
                 }
