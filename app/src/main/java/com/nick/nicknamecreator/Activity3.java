@@ -117,7 +117,7 @@ public class Activity3 extends AppCompatActivity {
         for(int i=0; i<len; i++){
             double AorB = Math.random();
             if(i==len-1){
-                if(AorB > 0.2){
+                if(AorB > 0.1){
                     //리스트에서 마지막글자 고르기
                     int a = rand.nextInt((LAST_WORD.length));
                     newName += LAST_WORD[a];
@@ -127,7 +127,7 @@ public class Activity3 extends AppCompatActivity {
                 }
             }
             else{
-                if(AorB > 0.3){
+                if(AorB > 0.2){
                     //리스트에서 중간글자 고르기
                     int a = rand.nextInt((MID_WORD.length));
                     newName += MID_WORD[a];
