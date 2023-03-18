@@ -20,7 +20,7 @@ import androidx.core.content.ContextCompat;
 
 import java.util.ArrayList;
 import java.util.Random;
-
+/*한글닉 랜덤*/
 public class Activity1 extends AppCompatActivity {
 
     private final String CLEAR_OUTPUT_TEXT = "";

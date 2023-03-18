@@ -13,7 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.security.PrivateKey;
 import java.util.Random;
-
+/*기본 랜덤*/
 public class Activity2 extends AppCompatActivity
 {
     final String CLEAR_OUTPUT_TEXT = "";

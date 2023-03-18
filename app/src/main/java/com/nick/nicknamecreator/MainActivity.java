@@ -60,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
 
         Button btn1 = (Button) findViewById(R.id.button_1);
         Button btn2 = (Button) findViewById(R.id.button_2);
+        Button btn3 = (Button) findViewById(R.id.button_3);
         Button btn_memoPage = (Button) findViewById(R.id.memo_btn);
 
         btn1.setOnClickListener(new View.OnClickListener() {
@@ -69,7 +70,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -77,7 +77,13 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
+        btn3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), Activity3.class);
+                startActivity(intent);
+            }
+        });
         btn_memoPage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
