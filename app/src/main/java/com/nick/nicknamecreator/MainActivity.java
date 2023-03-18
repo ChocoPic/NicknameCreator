@@ -13,10 +13,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.google.android.gms.ads.AdError;
-import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 
 import com.google.android.gms.ads.FullScreenContentCallback;
@@ -55,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
         helper = helper.getInst(this);
         pref = getSharedPreferences("Pref", MODE_PRIVATE);
-        //pref.edit().putBoolean("isFirstRun", true).apply();
+        pref.edit().putBoolean("isFirstRun", true).apply();//
         checkFirstRun();
 
         Button btn1 = (Button) findViewById(R.id.button_1);
@@ -90,8 +88,6 @@ public class MainActivity extends AppCompatActivity {
                 showInterstitial();
             }
         });
-//        Intent intent = new Intent(getApplicationContext(), ActivityMemo.class);
-//        startActivity(intent);
     }
 
     // 광고 불러오는 함수

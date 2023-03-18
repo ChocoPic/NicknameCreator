@@ -10,9 +10,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import java.security.PrivateKey;
 import java.util.Random;
+
 /*기본 랜덤*/
 public class Activity2 extends AppCompatActivity
 {
@@ -33,7 +32,7 @@ public class Activity2 extends AppCompatActivity
     char userInput[] = new char[LEN];
     String userInputString;
     static int clicked = 0;
-
+    static Toast toast;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,7 +77,7 @@ public class Activity2 extends AppCompatActivity
                     TextView tv = (TextView) v;
                     String value = tv.getText().toString();
                     helper.insertMemo(value);
-                    Toast.makeText(Activity2.this, "저장했습니다!", Toast.LENGTH_LONG).show();
+                    showToast("저장 완료!");
                     return true;
                 }
             });
@@ -105,26 +104,26 @@ public class Activity2 extends AppCompatActivity
 
                 try{
                     if(et_length.getText().toString().equals("")){
-                        Toast.makeText(Activity2.this, "숫자를 입력하세요", Toast.LENGTH_LONG).show();
+                        showToast("숫자를 입력하세요");
                     }
                     else {
                         try {
                             Integer len = Integer.parseInt("" + et_length.getText());
                             if ( len < 1 || len > 5)
-                                Toast.makeText(Activity2.this, "1~5글자까지 가능합니다", Toast.LENGTH_LONG).show();
+                                showToast("1~5글자까지 가능합니다");
                             else {
-                                Toast.makeText(Activity2.this, "얍!", Toast.LENGTH_SHORT).show();
+                               showToast("얍!");
                                 int i;
                                 for(i=0; i<TVS; i++){
                                     tvs[i].setText(createName(len, userInputString));
                                 }
                             }
                         } catch (Exception e) {
-                            Toast.makeText(Activity2.this, "숫자를 읽을 수가 없어요ㅠㅠ", Toast.LENGTH_LONG).show();
+                            showToast("숫자를 읽을 수가 없어요ㅠㅠ");
                         }
                     }
                 }catch (Exception e){
-                    Toast.makeText(Activity2.this, "제대로 입력해주세요!", Toast.LENGTH_LONG).show();
+                    showToast("제대로 입력해주세요!");
                     e.printStackTrace();
                 }
             }
@@ -209,6 +208,13 @@ public class Activity2 extends AppCompatActivity
         else{c = s.charAt(0);}
         return c;
     }
-
+    public void showToast(String text){
+        if(toast==null){
+            toast = Toast.makeText(Activity2.this, text, Toast.LENGTH_SHORT);
+        }else{
+            toast.setText(text);
+        }
+        toast.show();
+    }
 }
 

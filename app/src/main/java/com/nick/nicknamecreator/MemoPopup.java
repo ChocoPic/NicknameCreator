@@ -19,6 +19,7 @@ public class MemoPopup extends Activity {
     private TextView text_nick;
     private SQLHelper helper;
     private Context context = this;
+    static Toast toast;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -35,8 +36,13 @@ public class MemoPopup extends Activity {
             @Override
             public void onClick(View v) {
                 String value = text_nick.getText().toString();
-                helper.insertMemo(value);
-                Toast.makeText(MemoPopup.this, "저장했습니다!", Toast.LENGTH_LONG).show();
+                if(value.equals("") || value.replace(" ", "").length()==0){
+                    showToast("내용을 입력해주세요");
+                }else{
+                    helper.insertMemo(value);
+                    text_nick.setText("");
+                    showToast("저장 완료!");
+                }
             }
         });
         close_btn.setOnClickListener(new View.OnClickListener() {
@@ -45,5 +51,13 @@ public class MemoPopup extends Activity {
                 finish();
             }
         });
+    }
+    public void showToast(String text){
+        if(toast==null){
+            toast = Toast.makeText(MemoPopup.this, text, Toast.LENGTH_SHORT);
+        }else{
+            toast.setText(text);
+        }
+        toast.show();
     }
 }

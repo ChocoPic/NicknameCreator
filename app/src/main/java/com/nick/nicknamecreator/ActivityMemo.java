@@ -48,9 +48,9 @@ public class ActivityMemo extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 helper.clearMemo(context);
+                Toast.makeText(ActivityMemo.this, "모두 삭제되었습니다", Toast.LENGTH_SHORT).show();
                 adapter.clear();
                 adapter.notifyDataSetChanged();
-                Toast.makeText(ActivityMemo.this, "모두 삭제했습니다!", Toast.LENGTH_LONG).show();
                 blankText.setVisibility(View.VISIBLE);
             }
         });
@@ -85,5 +85,4 @@ public class ActivityMemo extends AppCompatActivity {
         }
         return memos;
     }
-
 }

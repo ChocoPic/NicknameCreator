@@ -13,6 +13,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Random;
+
 /*외국닉 랜덤*/
 public class Activity3 extends AppCompatActivity {
 
@@ -28,6 +29,7 @@ public class Activity3 extends AppCompatActivity {
 
     int popup = 0;
     final int MAX_LEN = 8;
+    static Toast toast;
 
     private final String[] LAST_WORD = {"나","나","나","나","나","나","노","니","다","든","든","든","디","디","디",
             "라","라","라","라","라","라","라","라","라","라","라","라","런","로","로","로","롯","류","르",
@@ -68,6 +70,7 @@ public class Activity3 extends AppCompatActivity {
                     TextView tv = (TextView) v;
                     String value = tv.getText().toString();
                     helper.insertMemo(value);
+                    showToast("저장 완료!");
                     return true;
                 }
             });
@@ -87,15 +90,15 @@ public class Activity3 extends AppCompatActivity {
                 popup = getIntent().getIntExtra("popup", -1);
 
                 if (et_length.getText().toString().equals("")) {
-                    Toast.makeText(Activity3.this, "숫자를 입력하세요", Toast.LENGTH_LONG).show();
+                    showToast("숫자를 입력하세요");
                 } else {
                     try {
                         Integer len = Integer.parseInt("" + et_length.getText());
 
                         if (len < 1 || len > 8)
-                            Toast.makeText(Activity3.this, "1~8글자만 가능합니다", Toast.LENGTH_LONG).show();
+                            showToast("1~8글자만 가능합니다");
                         else {
-                            Toast.makeText(Activity3.this, "얍!", Toast.LENGTH_SHORT).show();
+                            showToast("얍!");
                             //입력받은 개수에 맞게 랜덤으로 조합합니다
                             int i;
                             for (i = 0; i < TVS; i++) {
@@ -103,7 +106,7 @@ public class Activity3 extends AppCompatActivity {
                             }
                         }
                     } catch (Exception e) {
-                        Toast.makeText(Activity3.this, "숫자를 읽을 수가 없어요ㅠㅠ", Toast.LENGTH_LONG).show();
+                        showToast("숫자를 읽을 수가 없어요ㅠㅠ");
                         e.printStackTrace();
                     }
                 }
@@ -127,7 +130,7 @@ public class Activity3 extends AppCompatActivity {
                 }
             }
             else{
-                if(AorB > 0.2){
+                if(AorB > 0.1){
                     //리스트에서 중간글자 고르기
                     int a = rand.nextInt((MID_WORD.length));
                     newName += MID_WORD[a];
@@ -171,5 +174,14 @@ public class Activity3 extends AppCompatActivity {
 
     public int makeCh(int a, int b, int c){
         return (0xAC00 + 21*28*a +28*b + c);
+    }
+
+    public void showToast(String text){
+        if(toast==null){
+            toast = Toast.makeText(Activity3.this, text, Toast.LENGTH_SHORT);
+        }else{
+            toast.setText(text);
+        }
+        toast.show();
     }
 }

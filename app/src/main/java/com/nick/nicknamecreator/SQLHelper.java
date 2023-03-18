@@ -5,7 +5,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.widget.Toast;
 
 public class SQLHelper extends SQLiteOpenHelper {
     public static final int DB_VERSION = 1;
@@ -49,7 +48,6 @@ public class SQLHelper extends SQLiteOpenHelper {
     public long insertMemo(String data) {
         ContentValues values = new ContentValues();
         values.put(FeedContract.FeedEntry.COLUMN_MEMO, data);
-        Toast.makeText(context, "저장되었습니다!", Toast.LENGTH_SHORT).show();
         return db.insert(FeedContract.FeedEntry.TABLE_NAME, null, values);
     }
 
@@ -57,7 +55,6 @@ public class SQLHelper extends SQLiteOpenHelper {
         long id = getID_fromData(data);
         db.delete(FeedContract.FeedEntry.TABLE_NAME, FeedContract.FeedEntry.COLUMN_MEMO + "=? and "
                 + FeedContract.FeedEntry._ID + "=?", new String[]{data, String.valueOf(id)});
-        Toast.makeText(context, "삭제되었습니다!", Toast.LENGTH_SHORT).show();
     }
 
     public long getID_fromData(String data) {
@@ -71,7 +68,8 @@ public class SQLHelper extends SQLiteOpenHelper {
         return id;
     }
 
-    public void clearMemo(Context context){
-        db.delete(FeedContract.FeedEntry.TABLE_NAME,null,null);
+    public void clearMemo(Context context) {
+        db.delete(FeedContract.FeedEntry.TABLE_NAME, null, null);
     }
+
 }
