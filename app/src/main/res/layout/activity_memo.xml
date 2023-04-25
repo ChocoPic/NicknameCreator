@@ -14,7 +14,7 @@
         android:layout_marginBottom="30dp"
         android:gravity="center"
         android:text="길게 눌러 하나씩 삭제할 수 있어요 :)"
-        android:textColor="@color/colorWhite"
+        android:textColor="@color/colorAccent"
         android:textSize="14sp" />
 
     <ScrollView
@@ -56,8 +56,7 @@
                 android:id="@+id/memo_list"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom|center"
-                android:textAlignment="center" />
+                android:layout_gravity="bottom|center_horizontal" />
 
         </LinearLayout>
     </ScrollView>
