@@ -3,10 +3,7 @@ apply plugin: 'com.android.application'
 android {
     signingConfigs {
         debug {
-            keyAlias = 'key0'
-            keyPassword 'cj0709!!$'
-            storeFile file('C:\\Users\\cj\\Desktop\\새 폴더\\adKey\\ad_key.jks')
-            storePassword 'cj0709!!$'
+            ////
         }
     }
     compileSdkVersion 33
