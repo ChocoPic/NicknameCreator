@@ -2,6 +2,8 @@ package com.nick.nicknamecreator;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.res.ResourcesCompat;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -53,8 +55,12 @@ public class MainActivity extends AppCompatActivity {
 
         helper = helper.getInst(this);
         pref = getSharedPreferences("Pref", MODE_PRIVATE);
-        pref.edit().putBoolean("isFirstRun", true).apply();//
-        checkFirstRun();
+        //pref.edit().putBoolean("isFirstRun", true).apply();
+        int saved_pref_ver = pref.getInt("app_version", 0);
+        if(saved_pref_ver < BuildConfig.VERSION_CODE){  //저장된 버전과 현재 버전이 다르면
+            checkFirstRun();    //첫 실행인지 체크
+            pref.edit().putInt("app_version", BuildConfig.VERSION_CODE).apply();    //현재 버전 저장
+        }
 
         Button btn1 = (Button) findViewById(R.id.button_1);
         Button btn2 = (Button) findViewById(R.id.button_2);
@@ -94,7 +100,8 @@ public class MainActivity extends AppCompatActivity {
     private void loadAd(){
         AdRequest adRequest = new AdRequest.Builder().build();
         InterstitialAd.load(this,
-                getString(R.string.admob_test),         //테스트 광고 로드해보기
+                //getString(R.string.admob_ad_unit_id),
+                getString(R.string.admob_test),//테스트 광고 로드해보기
                 adRequest,
                 new InterstitialAdLoadCallback() {
 

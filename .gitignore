@@ -1,14 +1,20 @@
-*.iml
+# 안드로이드 빌드 관련, 임시 파일
 .gradle
+/build
+/captures
+.externalNativeBuild
+.cxx
+# 로컬 설정 파일
 /local.properties
+# 안드로이드 스튜디오 설정 파일
+*.iml
 /.idea/caches
 /.idea/libraries
 /.idea/modules.xml
 /.idea/workspace.xml
 /.idea/navEditor.xml
 /.idea/assetWizardSettings.xml
+# 릴리즈
+/app/release
+# 로컬 저장소
 .DS_Store
-/build
-/captures
-.externalNativeBuild
-.cxx

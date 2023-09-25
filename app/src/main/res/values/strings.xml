@@ -1,7 +1,18 @@
 <resources>
+    <!-- 앱 기본 정보 -->
     <string name="app_name">닉네임 생성 마법사</string>
+    <string name="app_version">Nickname Generator ver 3.2</string>
+
+    <!-- 애드몹-->
     <string name="admob_app_id">ca-app-pub-9932148089014412~2111393563</string>
     <string name="admob_ad_unit_id">ca-app-pub-9932148089014412/7091245744</string>
-
     <string name="admob_test">ca-app-pub-3940256099942544/1033173712</string>
+
+    <!-- UI 텍스트 -->
+    <string name="menu_basic">기본 랜덤</string>
+    <string name="menu_kor">순우리말 느낌 랜덤</string>
+    <string name="menu_fgn">외국어 느낌 랜덤</string>
+    <string name="menu_saved_nick">저장한 닉네임 목록 보기</string>
+
+
 </resources>
