@@ -4,6 +4,8 @@
 /captures
 .externalNativeBuild
 .cxx
+gradle.properties
+/app/src/main/AndroidManifest.xml
 # 로컬 설정 파일
 /local.properties
 # 안드로이드 스튜디오 설정 파일
