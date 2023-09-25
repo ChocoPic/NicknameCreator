@@ -1,3 +1,4 @@
+Last update : 2023.4.25
 # 닉네임 생성 마법사_업데이트버전
 <div>
   <img src="https://img.shields.io/badge/Android-3DDC84?style=flat-square&logo=Android&logoColor=ffffff"/>
