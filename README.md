@@ -12,12 +12,5 @@ Last update : 2023.4.25
   https://play.google.com/store/apps/details?id=com.nick.nicknamecreator</br>
 
 **************
-  <figure>
-      <img src="https://github.com/ChocoPic/NicknameCreator/assets/60088300/b55271cd-45ab-44de-98a7-746b0a7d178c" width="25%">
-      <img src="https://github.com/ChocoPic/NicknameCreator/assets/60088300/4a46383b-96ab-4a7b-ba2d-140324f203b9" width="25%">
-      <img src="https://github.com/ChocoPic/NicknameCreator/assets/60088300/e33225b5-1377-45fe-8d37-e6327c3ace05" width="25%">
-      <img src="https://github.com/ChocoPic/NicknameCreator/assets/60088300/66f43e1d-6cbe-40d1-8320-b48703862ee6" width="25%">
-      <img src="https://github.com/ChocoPic/NicknameCreator/assets/60088300/c014e2bb-6934-4617-bd31-e0f0223682da" width="25%">
-  </figure>
 
 </div>
