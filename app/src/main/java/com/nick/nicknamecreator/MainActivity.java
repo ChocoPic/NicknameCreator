@@ -2,6 +2,8 @@ package com.nick.nicknamecreator;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.res.ResourcesCompat;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -13,10 +15,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.google.android.gms.ads.AdError;
-import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 
 import com.google.android.gms.ads.FullScreenContentCallback;
@@ -56,10 +56,15 @@ public class MainActivity extends AppCompatActivity {
         helper = helper.getInst(this);
         pref = getSharedPreferences("Pref", MODE_PRIVATE);
         //pref.edit().putBoolean("isFirstRun", true).apply();
-        checkFirstRun();
+        int saved_pref_ver = pref.getInt("app_version", 0);
+        if(saved_pref_ver < BuildConfig.VERSION_CODE){  //저장된 버전과 현재 버전이 다르면
+            checkFirstRun();    //첫 실행인지 체크
+            pref.edit().putInt("app_version", BuildConfig.VERSION_CODE).apply();    //현재 버전 저장
+        }
 
         Button btn1 = (Button) findViewById(R.id.button_1);
         Button btn2 = (Button) findViewById(R.id.button_2);
+        Button btn3 = (Button) findViewById(R.id.button_3);
         Button btn_memoPage = (Button) findViewById(R.id.memo_btn);
 
         btn1.setOnClickListener(new View.OnClickListener() {
@@ -69,7 +74,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -77,22 +81,27 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
+        btn3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), Activity3.class);
+                startActivity(intent);
+            }
+        });
         btn_memoPage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showInterstitial();
             }
         });
-//        Intent intent = new Intent(getApplicationContext(), ActivityMemo.class);
-//        startActivity(intent);
     }
 
     // 광고 불러오는 함수
     private void loadAd(){
         AdRequest adRequest = new AdRequest.Builder().build();
         InterstitialAd.load(this,
-                getString(R.string.admob_test),         //테스트 광고 로드해보기
+                //getString(R.string.admob_ad_unit_id),
+                getString(R.string.admob_test),//테스트 광고 로드해보기
                 adRequest,
                 new InterstitialAdLoadCallback() {
 

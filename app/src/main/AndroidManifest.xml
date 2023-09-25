@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.nick.nicknamecreator">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.INTERNET"/>
 
@@ -26,6 +25,7 @@
         </activity>
         <activity android:name=".Activity1" />
         <activity android:name=".Activity2" />
+        <activity android:name=".Activity3" />
         <activity android:name=".MemoPopup" android:theme="@style/Theme.AppCompat.Dialog"/>
         <activity android:name=".ActivityMemo"/>
 
