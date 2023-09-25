@@ -23,7 +23,7 @@
         android:background="@color/colorWhite"
         android:ems="10"
         android:gravity="center"
-        android:hint="저장할 닉네임을 입력하세요!\n (최대 20개)"
+        android:hint="@string/memo_hint"
         android:inputType="textPersonName"
         android:textColor="@color/colorNavy"
         android:textColorHint="@color/colorGray"
