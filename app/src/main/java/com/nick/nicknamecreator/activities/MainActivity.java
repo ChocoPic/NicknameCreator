@@ -1,9 +1,7 @@
-package com.nick.nicknamecreator;
+package com.nick.nicknamecreator.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-import androidx.core.content.res.ResourcesCompat;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -27,6 +25,10 @@ import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+import com.nick.nicknamecreator.BuildConfig;
+import com.nick.nicknamecreator.service.PrefManager;
+import com.nick.nicknamecreator.R;
+import com.nick.nicknamecreator.service.SQLHelper;
 
 import java.util.ArrayList;
 
@@ -70,21 +72,21 @@ public class MainActivity extends AppCompatActivity {
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), Activity1.class);
+                Intent intent = new Intent(getApplicationContext(), ActivityKor.class);
                 startActivity(intent);
             }
         });
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), Activity2.class);
+                Intent intent = new Intent(getApplicationContext(), ActivityBasic.class);
                 startActivity(intent);
             }
         });
         btn3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), Activity3.class);
+                Intent intent = new Intent(getApplicationContext(), ActivityFor.class);
                 startActivity(intent);
             }
         });

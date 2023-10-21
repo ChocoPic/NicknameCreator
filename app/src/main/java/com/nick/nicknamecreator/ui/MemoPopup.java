@@ -1,4 +1,4 @@
-package com.nick.nicknamecreator;
+package com.nick.nicknamecreator.ui;
 
 import android.app.Activity;
 import android.content.Context;
@@ -11,6 +11,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+
+import com.nick.nicknamecreator.R;
+import com.nick.nicknamecreator.service.SQLHelper;
 
 
 public class MemoPopup extends Activity {

@@ -1,4 +1,4 @@
-package com.nick.nicknamecreator;
+package com.nick.nicknamecreator.service;
 
 import android.provider.BaseColumns;
 

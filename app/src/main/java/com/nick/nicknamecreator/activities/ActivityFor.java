@@ -1,4 +1,4 @@
-package com.nick.nicknamecreator;
+package com.nick.nicknamecreator.activities;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,10 +12,14 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.nick.nicknamecreator.ui.MemoPopup;
+import com.nick.nicknamecreator.R;
+import com.nick.nicknamecreator.service.SQLHelper;
+
 import java.util.Random;
 
 /*외국닉 랜덤*/
-public class Activity3 extends AppCompatActivity {
+public class ActivityFor extends AppCompatActivity {
 
     private final String CLEAR_OUTPUT_TEXT = "";
     private final int[] TV_ids = {R.id.tv1, R.id.tv2, R.id.tv3, R.id.tv4, R.id.tv5, R.id.tv6, R.id.tv7, R.id.tv8, R.id.tv9, R.id.tv10, R.id.tv11, R.id.tv12, R.id.tv13, R.id.tv14, R.id.tv15, R.id.tv16};
@@ -52,7 +56,7 @@ public class Activity3 extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_1);
+        setContentView(R.layout.activity_lengtth);
 
         et_length = findViewById(R.id.editText_length);
         b_create = findViewById(R.id.button_create);
@@ -178,7 +182,7 @@ public class Activity3 extends AppCompatActivity {
 
     public void showToast(String text){
         if(toast==null){
-            toast = Toast.makeText(Activity3.this, text, Toast.LENGTH_SHORT);
+            toast = Toast.makeText(ActivityFor.this, text, Toast.LENGTH_SHORT);
         }else{
             toast.setText(text);
         }

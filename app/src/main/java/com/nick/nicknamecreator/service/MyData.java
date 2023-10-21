@@ -1,39 +1,14 @@
-package com.nick.nicknamecreator;
+package com.nick.nicknamecreator.service;
 
-import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
+public class MyData {
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-
-import java.util.ArrayList;
-import java.util.Random;
-/*한글닉 랜덤*/
-public class Activity1 extends AppCompatActivity {
-
-    private final String CLEAR_OUTPUT_TEXT = "";
-    private final int[] TV_ids = {R.id.tv1, R.id.tv2, R.id.tv3, R.id.tv4, R.id.tv5, R.id.tv6, R.id.tv7, R.id.tv8, R.id.tv9, R.id.tv10, R.id.tv11, R.id.tv12, R.id.tv13, R.id.tv14, R.id.tv15, R.id.tv16};
-    private EditText et_length;
-    private Button b_create;
-    private TextView[] tvs = new TextView[TVS];
-    private Button btn_memo;
-    private static final int TVS = 16;
-    private Context context = this;
-    private SQLHelper helper;
-
-    int popup = 0;
-    final int MAX_LEN = 8;
-    static Toast toast;
-
-    private final String[] ONE_WORD = {"가","가","가","가","가","가","가","가","가","가","가","가","가","가","가","가","가","가","가","강","강","강","개","개","개",
+    public final int[] CHO = {756, 164, 674, 693, 38, 1782, 699, 749, 6, 1127, 31, 1606, 630, 76, 151, 126, 157, 220, 315};
+    public final int[] JUN = {2695, 598, 69, 1, 592, 422, 170, 19, 1064, 13, 0, 50, 19, 957, 13, 6, 88, 50, 737, 57, 2380};
+    public final int[] JON = {6618, 183, 0, 6, 686, 0, 0, 6, 945, 0, 0, 0, 0, 0, 0, 0, 642, 88, 13, 202, 0, 535, 19, 38, 0, 13, 6, 0};
+    public final int[] CHO_LAST = {713, 139, 713, 652, 35, 2174, 678, 878, 2, 1026, 26, 1452, 539, 61, 165, 78, 191, 243, 235};
+    public final int[] JUN_LAST = {2617, 583, 61, 0, 609, 417, 165, 9, 783, 9, 0, 35, 26, 974, 17, 9, 96, 70, 704, 35, 2781};
+    public final int[] JON_LAST = {6722, 174, 0, 9, 574, 0, 0, 9, 939, 0, 0, 0, 0, 0, 0, 0, 730, 87, 17, 139, 0, 530, 9, 35, 0, 17, 9, 0};
+    public final String[] KOR_ONE = {"가","가","가","가","가","가","가","가","가","가","가","가","가","가","가","가","가","가","가","강","강","강","개","개","개",
             "고","고","고","고","고","고","고","구","구","구","구","구","구","구","구","그","그","그","그","그","그","그","그","금","금","금","금","금","금","기","기",
             "기","기","기","기","기","기","기","기","기","기","기","기","기","기","기","기","길","길","길","길","길","길","까","까","까","꼬","꼬","꼬","꼬","꽃","꽃",
             "꽃","꽃","나","나","나","나","나","나","나","나","나","나","나","나","나","나","나","나","나","나","나","남","남","남","남","남","내","내","내","내","내",
@@ -62,7 +37,7 @@ public class Activity1 extends AppCompatActivity {
             "지","지","지","지","지","지","지","지","지","지","지","지","짜","짜","짜","짜","짜","짜","천","천","천","치","치","치","치","치","치","치","타","타","타",
             "타","파","파","파","파","파","파","파","푸","푸","푸","풀","풀","풀","피","피","피","하","하","하","하","하","하","하","하","하","하","하","하","한","한",
             "한","한","한","한","한","해","해","해","해","해","희","희","희"};
-    private final String[] TWO_WORD = {"미르","푸르","미리","리내","온새","미로","한울","아라","마루","가람","가온","가온","누리","가시","버시",
+    public final String[] KOR_TWO = {"미르","푸르","미리","리내","온새","미로","한울","아라","마루","가람","가온","가온","누리","가시","버시",
             "나리","솔길","윤슬","비늘","해리","헤윰","나린","아리","리아","피아","푸실","단미","아토","타니","까미","람이","희나","라온","하제","힐조","다미","미로","에멜",
             "지로","꽃잠","사나","나래","르샤","나르","베리","벼리","흐노","노니","노고","고지","지리","아미","이든","이내","너울","너비","누리","누리","아사","하제","아스",
             "라이","슈룹","가라","사니","라사","초아","나린","호드","두리","바람","까부","누리","까비","매지","리내","모라","라기","삿갓","달비","리나","비나","그린","나래",
@@ -79,132 +54,27 @@ public class Activity1 extends AppCompatActivity {
             "대기","사래","수지","지니","수채","스스","시게","시나","브로","시래","시세","시앗","랑이","실터","마니","니리","아람","아름","드리","아주","버니","안날","알섬",
             "알심","머리","라지","부루","너리","여남","남은","여리","여우","우비","여줄","가리","영판","옥셈","올무","아리","마니","수리","웃비","의초","리끼","도리","수리",
             "가리","여우","주니","돌이","진솔","짐짓","짜발","량이","짜장","마리","정이","찌그","트레","바리","푸네","풀무","하냥","하늬","하릅","사리","한무","한풀","구리",
-            };
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_1);
-
-        et_length = findViewById(R.id.editText_length);
-        b_create = findViewById(R.id.button_create);
-        btn_memo = findViewById(R.id.memo_btn);
-        helper = helper.getInst(context);
-
-
-        for (int i = 0; i < TVS; i++) {
-            tvs[i] = (TextView) findViewById(TV_ids[i]);
-            tvs[i].setText(CLEAR_OUTPUT_TEXT);
-            registerForContextMenu(tvs[i]);
-            tvs[i].setOnLongClickListener(new View.OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View v) {
-                    TextView tv = (TextView) v;
-                    String value = tv.getText().toString();
-                    helper.insertMemo(value);
-                    showToast("저장 완료!");
-                    return true;
-                }
-            });
-        }
-
-        btn_memo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), MemoPopup.class);
-                startActivity(intent);
-            }
-        });
-
-        b_create.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                popup = getIntent().getIntExtra("popup", -1);
-
-                if (et_length.getText().toString().equals("")) {
-                    showToast("숫자를 입력하세요");
-                } else {
-                    try {
-                        Integer len = Integer.parseInt("" + et_length.getText());
-
-                        if (len < 1 || len > 8)
-                            showToast("1~8글자만 가능합니다");
-                        else {
-                            showToast("얍!");
-                            // ONE과 TWO를 조합하여 입력받은 개수에 맞게 랜덤으로 조합합니다
-                            int i;
-                            for (i = 0; i < TVS; i++) {
-                                tvs[i].setText(createName_ver3(len));
-                            }
-                        }
-                    } catch (Exception e) {
-                        showToast("숫자를 읽을 수가 없어요ㅠㅠ");
-                        e.printStackTrace();
-                    }
-                }
-            }
-        });
-    }
-
-    public String createName_ver3(int len) {
-        Random rand = new Random();
-        String newName = "";
-        for(int i=0; i<len; i++){
-            double AorB = Math.random();
-            if(AorB > 0.3 && i < len-1){
-                //두글자 배열에서 고름
-                int a = rand.nextInt(TWO_WORD.length);
-                newName += TWO_WORD[a];
-                i++;
-            }else if(AorB > 0.1){
-                //한글자 배열에서 고름
-                int a = rand.nextInt(ONE_WORD.length);
-                newName += ONE_WORD[a];
-            }else{
-                //랜덤으로 한글자 조합
-                newName += createC();
-            }
-            //Log.i("단어생성중",i+newName);
-        }
-        //Log.i("단어생성완료",newName);
-        return newName;
-    }
-
-    public String createC(){
-        char chr;
-        Random rand = new Random();
-        //초성 60
-        int cho_list[] = {0,0,0,0,1,2,2,2,2,3,3,3,3,4,5,5,5,5,6,6,6,6,7,7,7,7,8,9,9,9
-                ,9,10,11,11,11,12,12,12,12,13,14,14,14,14,15,15,15,15,16,16,16,16,17,17,17,17,18,18,18,18};
-        //중성 70
-        int jun_list[] = {0,0,0,0,0,0,0,0,1,1,1,2,2,2,3,4,4,4,4,4,4,4,5,5,5,6,6,6,7,8
-                ,8,8,8,8,9,10,11,12,13,13,13,14,14,14,15,16,17,17,17,18,18,18,18,18,18,18,19,20,20,20
-                ,20,20,20,20,20,20,20,20,20,18};
-        //종성 60
-        int jon_list[] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,4,4
-                ,4,4,4,4,4,4,7,8,8,8,8,8,8,8,8,8,8,10,0,0
-                ,16,16,16,16,16,16,16,17,17,27,17,0,19,19,21,21,21,21,21,26, 27};
-
-        int cho = rand.nextInt(50);
-        int jun = rand.nextInt(50);
-        int jon = rand.nextInt(50);
-
-        int a = cho_list[cho]; int b = jun_list[jun]; int c = jon_list[jon];
-        chr = (char)makeCh(a,b,c);
-
-        return String.valueOf(chr);
-    }
-
-    public int makeCh(int a, int b, int c){
-        return (0xAC00 + 21*28*a +28*b + c);
-    }
-
-    public void showToast(String text){
-        if(toast==null){
-            toast = Toast.makeText(Activity1.this, text, Toast.LENGTH_SHORT);
-        }else{
-            toast.setText(text);
-        }
-        toast.show();
-    }
+    };
+    public final String[] A = {"불","INTJ","현명한","바라보는","종종","오","열정적인","끈기있는","ISFJ","하이","이상한","유용한","깔끔한","날개달린","깨끗한","ISTJ","까리한",
+            "회색","녹슨","빨강","미약한","ESFP","강철","격렬한","그냥","열심히 일하는","방구석","존경스러운","활기찬","응","얼음","ENFJ","일반적으로","흥많은","빛이나는",
+            "그게","신선한","짱짱","통계적으로","이성적인","신비로운","너무","겨울날의","친절한","빛바랜","자신있는","기묘한","어쩔","스마트한","보들보들","요상한","ENTJ",
+            "고물","완전","머리좋은","반가워","INTP","INFJ","저쩔","잔머리쓰는","재밌는","직관적인","ISTP","ESTP","파랑","화기애애한","민트","종이","경쾌한","진짜","섹시",
+            "정확한","반짝반짝","검정","무쇠","바람","ESTJ","소곤소곤","핸섬","보라","수다스러운","야매","어떻게","까끌까끌","유머러스한","그건","가을날의","강한","밝은","잘생긴",
+            "언젠간","큐티","외향적인","명백히","ENTP","귀여운","매력덩어리","역동적인","다이아","마성의","대담한","아주","아마도","치명적인","예쁜","몽실몽실","탐험하는","도전하는",
+            "조금은","말많은","속삭이는","무조건","강력한","말랑말랑","꾸준한","사랑스러운","똑똑한","화난","ENFP","시한폭탄","고요한","빤짝빤짝","뿔달린","미세한","ISFP","순박한","바이바이",
+            "투명한","급발진하는","크리티컬","작은","스르르","귀염둥이","긴","행복한","상냥한","우아한","잘가","초록","내향적인","짧은","핑크","약간","평화로운","귀요미","아름다운","왁자지껄",
+            "맞음","높은","아니","투명","매끈한","정말","조용한","의문스러운","멀리","하양","봄날의","프리티","여름날의","창가의","시끄러운","미소 짓는","조심조심","분명히","어두운","곧","왜",
+            "주황","창의적인","아낌없이","빛나는","노랑","네이비","흐르는","착한","화려한","솜","포근한","돌","짱센","ESFJ","물","큰","부들부들","깜깜한","신묘한","안녕","완벽한","INFP",
+            "매력적인","감성적인","간지나는","맑은","흥겨운"};
+    public final String[] B = {"입문자","봄","천재","빵","여름","구덩이","뚜벅이","박새","버스기사","고인물","개","장인","선크림","마에스트로","마니아","사마귀","돌고래","벚꽃",
+            "잔디","멍멍이","악어","라임","시인","드래곤","팬더","독수리","짐","강","우산","말","날다람쥐","장미","거북","혜성","고슴도치","고릴라","오렌지","헬멧","솔로",
+            "오소리","핸드백","시민","왕자","먹","봉황","바퀴","교사","여우","부채","공기","바보","유니콘","불닭","냥냥이","어른이","책","보드","인형","지갑","걸","함박눈",
+            "스키","스파이","코끼리","두더지","데이터","귤","운석","파리","거미줄","성인","원숭이","무당벌레","흰수염고래","하늘다람쥐","닭","앵무새","태블릿","샤프","연필",
+            "과학","박사","피자","별님","학생","은하수","지렁이","뉴비","먼지","보틀","구렁이","단풍","스마트폰","짱","꽃","샌드위치","물소","오목눈이","팽귄","청설모","마스터",
+            "워리어","범고래","별","메이커","곰","메뚜기","아나콘다","자동차","프로그램","머그잔","모기","다리","영어","과자","고래","노트북","페가수스","국어","보이","코알라",
+            "공주","사슴","소","히어로","파랑새","고등어","카멜레온","겨울","생물","다람쥐","햇살","꿈","펭귄","토끼","블랙홀","회오리","선인장","송아지","기린","뱀","스피커",
+            "개구리","시계","테이블","치타","선풍기","칼바람","주먹","냉장고","감독","자전거","공작","알고리즘","오리","샛별","늑대","암탉","호랑이","펜","담당","왕","수탉","어린이",
+            "카메라","샌드백","강아지","수정","사자","치킨","낙엽","사탕","보스","곰팡이","야옹이","물리","기차","볼펜","개나리","나방","도깨비","거북이","고양이","미적분","염소","책가방",
+            "돼지","진눈깨비","표범","스니커즈","신발","목련","여왕","붓","눈","불사조","가을","수학","전문가","파일","안경","용","족발","마법사","닉네임","별똥별","평균","사람","택시",
+            "바다","나비","김밥","썩은물","황제","이어폰","화학","거미","립스틱","킥보드","햄스터","호수","버스","병아리","캥거루","직박구리","마우스","왕도마뱀","초콜릿","피닉스","선생님","세포","초보자"};
 }

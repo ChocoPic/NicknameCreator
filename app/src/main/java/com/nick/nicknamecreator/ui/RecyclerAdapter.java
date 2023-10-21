@@ -1,4 +1,4 @@
-package com.nick.nicknamecreator;
+package com.nick.nicknamecreator.ui;
 
 import android.content.Context;
 import android.view.ContextMenu;
@@ -12,6 +12,9 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.nick.nicknamecreator.R;
+import com.nick.nicknamecreator.service.SQLHelper;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package com.nick.nicknamecreator;
+package com.nick.nicknamecreator.activities;
 import android.content.Context;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -11,6 +11,10 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.nick.nicknamecreator.R;
+import com.nick.nicknamecreator.ui.RecyclerAdapter;
+import com.nick.nicknamecreator.service.SQLHelper;
 
 import java.util.ArrayList;
 
