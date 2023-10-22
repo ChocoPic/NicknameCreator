@@ -3,7 +3,6 @@ package com.nick.nicknamecreator.activities;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -42,7 +41,7 @@ public class ActivityFor extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_lengtth);
+        setContentView(R.layout.activity_length);
 
         et_length = findViewById(R.id.editText_length);
         b_create = findViewById(R.id.button_create);

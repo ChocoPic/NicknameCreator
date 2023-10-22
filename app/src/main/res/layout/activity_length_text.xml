@@ -78,7 +78,8 @@
                 android:maxLength="1"
                 android:textColor="@color/colorWhite"
                 android:textColorHighlight="@color/colorMint"
-                android:textColorHint="@color/colorGray" />
+                android:textColorHint="@color/colorGray"
+                android:textSize="18sp" />
 
             <EditText
                 android:id="@+id/editText2"
@@ -94,7 +95,8 @@
                 android:maxLength="1"
                 android:textColor="@color/colorWhite"
                 android:textColorHighlight="#2EEDE7"
-                android:textColorHint="@color/colorGray" />
+                android:textColorHint="@color/colorGray"
+                android:textSize="18sp" />
 
             <EditText
                 android:id="@+id/editText3"
@@ -109,7 +111,8 @@
                 android:maxLength="1"
                 android:textColor="@color/colorWhite"
                 android:textColorHighlight="#2EEDE7"
-                android:textColorHint="@color/colorGray" />
+                android:textColorHint="@color/colorGray"
+                android:textSize="18sp" />
 
             <EditText
                 android:id="@+id/editText4"
@@ -124,7 +127,8 @@
                 android:maxLength="1"
                 android:textColor="@color/colorWhite"
                 android:textColorHighlight="#2EEDE7"
-                android:textColorHint="@color/colorGray" />
+                android:textColorHint="@color/colorGray"
+                android:textSize="18sp" />
 
             <EditText
                 android:id="@+id/editText5"
@@ -140,7 +144,8 @@
                 android:maxLength="1"
                 android:textColor="@color/colorWhite"
                 android:textColorHighlight="#2EEDE7"
-                android:textColorHint="@color/colorGray" />
+                android:textColorHint="@color/colorGray"
+                android:textSize="18sp" />
 
         </LinearLayout>
     </LinearLayout>

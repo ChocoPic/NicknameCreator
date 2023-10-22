@@ -16,15 +16,14 @@ import android.widget.ImageView;
 
 import com.google.android.gms.ads.AdError;
 import com.google.android.gms.ads.AdRequest;
-
 import com.google.android.gms.ads.FullScreenContentCallback;
 import com.google.android.gms.ads.LoadAdError;
 import com.google.android.gms.ads.interstitial.InterstitialAd;
-import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 import com.nick.nicknamecreator.BuildConfig;
 import com.nick.nicknamecreator.service.PrefManager;
 import com.nick.nicknamecreator.R;
@@ -35,7 +34,6 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     private PrefManager prefManager = new PrefManager();
-
     private InterstitialAd mAd;
     public SharedPreferences pref;
     public SQLHelper helper;
@@ -50,10 +48,9 @@ public class MainActivity extends AppCompatActivity {
         //광고 초기화
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override
-            public void onInitializationComplete(InitializationStatus initializationStatus) {}
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
         });
-        //광고 불러오기
-        loadAd();
 
         helper = helper.getInst(this);
         pref = getSharedPreferences("Pref", MODE_PRIVATE);
@@ -67,33 +64,42 @@ public class MainActivity extends AppCompatActivity {
         Button btn1 = (Button) findViewById(R.id.button_1);
         Button btn2 = (Button) findViewById(R.id.button_2);
         Button btn3 = (Button) findViewById(R.id.button_3);
+        Button btn4 = (Button) findViewById(R.id.button_4);
         Button btn_memoPage = (Button) findViewById(R.id.memo_btn);
 
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), ActivityKor.class);
-                startActivity(intent);
+                showInterstitial(intent);
             }
         });
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), ActivityBasic.class);
-                startActivity(intent);
+                showInterstitial(intent);
             }
         });
         btn3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), ActivityFor.class);
-                startActivity(intent);
+                showInterstitial(intent);
+            }
+        });
+        btn4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), ActivityCombine.class);
+                showInterstitial(intent);
             }
         });
         btn_memoPage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showInterstitial();
+                Intent intent = new Intent(getApplicationContext(), ActivityMemo.class);
+                showInterstitial(intent);
             }
         });
     }
@@ -106,23 +112,20 @@ public class MainActivity extends AppCompatActivity {
                 getString(R.string.admob_test),//테스트 광고 로드해보기
                 adRequest,
                 new InterstitialAdLoadCallback() {
-
                     @Override
                     public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
                         Log.i("광고로드실패", loadAdError.getMessage());
                         mAd = null;
                     }
-
                     @Override
                     public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
                         Log.i("광고로드성공", "onAdLoaded");
                         mAd = interstitialAd;
                     }
-
                 });
     }
     // 광고 보여주는 함수
-    private void showInterstitial() {
+    private void showInterstitial(Intent intent) {
         // Show the ad if it's ready. Otherwise toast and restart the game.
         if (mAd != null) {
             mAd.show(this);
@@ -130,14 +133,13 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onAdDismissedFullScreenContent() {
                     Log.d("광고", "광고 dismissed");
-                    Intent intent = new Intent(getApplicationContext(), ActivityMemo.class);
                     startActivity(intent);
+                    loadAd();
                 }
 
                 @Override
                 public void onAdFailedToShowFullScreenContent(@NonNull AdError adError) {
                     Log.d("광고", "광고실패");
-                    Intent intent = new Intent(getApplicationContext(), ActivityMemo.class);
                     startActivity(intent);
                 }
 
@@ -148,11 +150,11 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         } else {
-            Intent intent = new Intent(getApplicationContext(), ActivityMemo.class);
             startActivity(intent);
             loadAd();
         }
     }
+
     // 첫 실행이면 도움말 보여주는 함수
     public void checkFirstRun(){
         boolean isFirstRun = pref.getBoolean("isFirstRun", true);
