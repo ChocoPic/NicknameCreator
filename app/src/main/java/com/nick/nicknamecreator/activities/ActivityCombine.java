@@ -23,10 +23,8 @@ public class ActivityCombine extends AppCompatActivity {
     private static final String CLEAR_OUTPUT_TEXT = "";
     private final int [] TV_ids = {R.id.textView6, R.id.textView7, R.id.textView8, R.id.textView9, R.id.textView10};
     private final static int TVS = 5;
-    TextView[] tvs = new TextView[TVS];
-    private Button btn_memo;
-    private Button b_create;
-    private Context context = this;
+    private final TextView[] tvs = new TextView[TVS];
+    private final Context context = this;
     private SQLHelper helper;
     static Toast toast;
     int popup = 0;
@@ -39,9 +37,9 @@ public class ActivityCombine extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_combinate);
 
-        b_create = findViewById(R.id.button_create);
-        btn_memo = findViewById(R.id.memo_btn);
-        helper = helper.getInst(context);
+        Button b_create = findViewById(R.id.button_create);
+        Button btn_memo = findViewById(R.id.memo_btn);
+        helper = SQLHelper.getInst(context);
 
 
         for (int i = 0; i < TVS; i++) {

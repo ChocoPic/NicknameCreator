@@ -20,9 +20,9 @@ import java.util.ArrayList;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.mViewHolder> {
 
-    private ArrayList<String> items;
-    private SQLHelper helper;
-    private Context context;
+    private final ArrayList<String> items;
+    private final SQLHelper helper;
+    private final Context context;
 
     public class mViewHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener {
         TextView memoText;
@@ -39,19 +39,17 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.mViewH
             delete.setOnMenuItemClickListener(onMenu);
         }
 
-        private MenuItem.OnMenuItemClickListener onMenu = new MenuItem.OnMenuItemClickListener() {
+        private final MenuItem.OnMenuItemClickListener onMenu = new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(final MenuItem item) {
-                switch (item.getItemId()) {
-                    case 1:
-                        int pos = getAdapterPosition();
-                        String memo = items.get(pos);
-                        items.remove(pos);
-                        helper.deleteMemo(memo);
-                        Toast.makeText(context.getApplicationContext(), "삭제되었습니다", Toast.LENGTH_SHORT).show();
-                        notifyItemRemoved(pos);
-                        notifyItemRangeChanged(pos, items.size());
-                        break;
+                if (item.getItemId() == 1) {
+                    int pos = getBindingAdapterPosition();
+                    String memo = items.get(pos);
+                    items.remove(pos);
+                    helper.deleteMemo(memo);
+                    Toast.makeText(context.getApplicationContext(), "삭제되었습니다", Toast.LENGTH_SHORT).show();
+                    notifyItemRemoved(pos);
+                    notifyItemRangeChanged(pos, items.size());
                 }
                 return true;
             }
@@ -61,7 +59,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.mViewH
     public RecyclerAdapter(ArrayList<String> items, Context context) {
         this.items = items;
         this.context = context;
-        this.helper = helper.getInst(context);
+        this.helper = SQLHelper.getInst(context);
     }
 
     @NonNull

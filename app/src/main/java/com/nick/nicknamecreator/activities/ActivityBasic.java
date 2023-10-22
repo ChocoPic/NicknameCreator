@@ -21,17 +21,13 @@ import com.nick.nicknamecreator.service.SQLHelper;
 /*기본 랜덤*/
 public class ActivityBasic extends AppCompatActivity
 {
-    final String CLEAR_OUTPUT_TEXT = "";
     private final int [] TV_ids = {R.id.tv1, R.id.tv2, R.id.tv3, R.id.tv4, R.id.tv5, R.id.tv6, R.id.tv7, R.id.tv8, R.id.tv9, R.id.tv10, R.id.tv11, R.id.tv12, R.id.tv13, R.id.tv14, R.id.tv15, R.id.tv16};
     private static final int TVS = 16;
-    private TextView [] tvs = new TextView[TVS];
-    EditText n1, n2, n3, n4, n5;
-    EditText et_length;
-    Button b_create;
-    Button btn_memo;
-    TextView info_text;
-    Button info_btn;
-    private Context context = this;
+    private final TextView [] tvs = new TextView[TVS];
+    private EditText n1, n2, n3, n4, n5;
+    private EditText et_length;
+    private TextView info_text;
+    private final Context context = this;
     private SQLHelper helper;
 
     static final int LEN = 5;
@@ -54,12 +50,12 @@ public class ActivityBasic extends AppCompatActivity
         n5 = findViewById(R.id.editText5);
 
         et_length = findViewById(R.id.editText_length);
-        b_create = findViewById(R.id.button_create);
+        Button b_create = findViewById(R.id.button_create);
 
-        btn_memo = findViewById(R.id.memo_btn);
+        Button btn_memo = findViewById(R.id.memo_btn);
         info_text = (TextView) findViewById(R.id.info_textView);
-        info_btn = (Button) findViewById(R.id.info_button);
-        helper = helper.getInst(context);
+        Button info_btn = (Button) findViewById(R.id.info_button);
+        helper = SQLHelper.getInst(context);
 
         info_text.setVisibility(View.GONE);
         info_btn.setOnClickListener(new View.OnClickListener() {
@@ -77,6 +73,7 @@ public class ActivityBasic extends AppCompatActivity
 
         for(int i=0; i<TVS; i++){
             tvs[i] = (TextView)findViewById(TV_ids[i]);
+            String CLEAR_OUTPUT_TEXT = "";
             tvs[i].setText(CLEAR_OUTPUT_TEXT);
             registerForContextMenu(tvs[i]);
             tvs[i].setOnLongClickListener(new View.OnLongClickListener() {

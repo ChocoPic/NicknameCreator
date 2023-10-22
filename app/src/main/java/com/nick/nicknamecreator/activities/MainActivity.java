@@ -32,12 +32,10 @@ import com.nick.nicknamecreator.service.SQLHelper;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-
-    private PrefManager prefManager = new PrefManager();
     private InterstitialAd mAd;
     public SharedPreferences pref;
     public SQLHelper helper;
-    private Context context = this;
+    private final Context context = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        helper = helper.getInst(this);
+        helper = SQLHelper.getInst(this);
         pref = getSharedPreferences("Pref", MODE_PRIVATE);
         //pref.edit().putBoolean("isFirstRun", true).apply();
         int saved_pref_ver = pref.getInt("app_version", 0);
@@ -108,8 +106,8 @@ public class MainActivity extends AppCompatActivity {
     private void loadAd(){
         AdRequest adRequest = new AdRequest.Builder().build();
         InterstitialAd.load(this,
-                getString(R.string.admob_ad_unit_id),
-//                getString(R.string.admob_test),//테스트 광고 로드해보기
+//                getString(R.string.admob_ad_unit_id),
+                getString(R.string.admob_test),//테스트 광고 로드해보기
                 adRequest,
                 new InterstitialAdLoadCallback() {
                     @Override
@@ -177,16 +175,16 @@ public class MainActivity extends AppCompatActivity {
     // 첫 실행인지 아닌지 판단하는 함수
     public void backUpPref(){
         ArrayList<String> nickName = new ArrayList<>();
-        prefManager.getPreferences(context);
+        PrefManager.getPreferences(context);
         try{
             for(int i=0; i<20; i++){
-                String text = prefManager.getString(this, String.valueOf(i));
+                String text = PrefManager.getString(this, String.valueOf(i));
                 if(!text.equals("")) {
                     nickName.add(text);
                     helper.insertMemo(nickName.get(i));
                 }
             }
-            prefManager.clear(context);
+            PrefManager.clear(context);
         }catch (Exception e){
             e.printStackTrace();
         }

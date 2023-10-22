@@ -12,13 +12,11 @@ public class SQLHelper extends SQLiteOpenHelper {
 
     public static SQLHelper inst;
 
-    private SQLiteDatabase db;
-    private Context context;
+    private final SQLiteDatabase db;
 
     public SQLHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
         db = this.getWritableDatabase();
-        this.context = context;
     }
 
     @Override
@@ -45,10 +43,10 @@ public class SQLHelper extends SQLiteOpenHelper {
     }
 
 
-    public long insertMemo(String data) {
+    public void insertMemo(String data) {
         ContentValues values = new ContentValues();
         values.put(FeedContract.FeedEntry.COLUMN_MEMO, data);
-        return db.insert(FeedContract.FeedEntry.TABLE_NAME, null, values);
+        db.insert(FeedContract.FeedEntry.TABLE_NAME, null, values);
     }
 
     public void deleteMemo(String data) {

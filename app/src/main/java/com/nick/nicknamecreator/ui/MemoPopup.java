@@ -17,11 +17,9 @@ import com.nick.nicknamecreator.service.SQLHelper;
 
 
 public class MemoPopup extends Activity {
-    private Button save_btn;
-    private Button close_btn;
     private TextView text_nick;
     private SQLHelper helper;
-    private Context context = this;
+    private final Context context = this;
     static Toast toast;
 
     @Override
@@ -29,11 +27,11 @@ public class MemoPopup extends Activity {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.popup_memo);
-        save_btn = (Button) findViewById(R.id.btn);
-        close_btn = (Button)findViewById(R.id.close_btn);
+        Button save_btn = (Button) findViewById(R.id.btn);
+        Button close_btn = (Button) findViewById(R.id.close_btn);
         text_nick = (EditText)findViewById(R.id.infoText);
 
-        helper = helper.getInst(context);
+        helper = SQLHelper.getInst(context);
 
         save_btn.setOnClickListener(new View.OnClickListener() {
             @Override

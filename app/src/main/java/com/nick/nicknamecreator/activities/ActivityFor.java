@@ -22,14 +22,11 @@ import java.util.Random;
 /*외국닉 랜덤*/
 public class ActivityFor extends AppCompatActivity {
 
-    private final String CLEAR_OUTPUT_TEXT = "";
     private final int[] TV_ids = {R.id.tv1, R.id.tv2, R.id.tv3, R.id.tv4, R.id.tv5, R.id.tv6, R.id.tv7, R.id.tv8, R.id.tv9, R.id.tv10, R.id.tv11, R.id.tv12, R.id.tv13, R.id.tv14, R.id.tv15, R.id.tv16};
     private EditText et_length;
-    private Button b_create;
-    private TextView[] tvs = new TextView[TVS];
-    private Button btn_memo;
+    private final TextView[] tvs = new TextView[TVS];
     private static final int TVS = 16;
-    private Context context = this;
+    private final Context context = this;
     private SQLHelper helper;
 
     int popup = 0;
@@ -44,13 +41,14 @@ public class ActivityFor extends AppCompatActivity {
         setContentView(R.layout.activity_length);
 
         et_length = findViewById(R.id.editText_length);
-        b_create = findViewById(R.id.button_create);
-        btn_memo = findViewById(R.id.memo_btn);
-        helper = helper.getInst(context);
+        Button b_create = findViewById(R.id.button_create);
+        Button btn_memo = findViewById(R.id.memo_btn);
+        helper = SQLHelper.getInst(context);
 
 
         for (int i = 0; i < TVS; i++) {
             tvs[i] = (TextView) findViewById(TV_ids[i]);
+            String CLEAR_OUTPUT_TEXT = "";
             tvs[i].setText(CLEAR_OUTPUT_TEXT);
             registerForContextMenu(tvs[i]);
             tvs[i].setOnLongClickListener(new View.OnLongClickListener() {
@@ -82,7 +80,7 @@ public class ActivityFor extends AppCompatActivity {
                     showToast("숫자를 입력하세요");
                 } else {
                     try {
-                        Integer len = Integer.parseInt("" + et_length.getText());
+                        int len = Integer.parseInt("" + et_length.getText());
 
                         if (len < 1 || len > 8)
                             showToast("1~8글자만 가능합니다");
@@ -91,7 +89,7 @@ public class ActivityFor extends AppCompatActivity {
                             //입력받은 개수에 맞게 랜덤으로 조합합니다
                             int i;
                             for (i = 0; i < TVS; i++) {
-                                tvs[i].setText(createName_ver3(len));
+                                tvs[i].setText(createName_ver4(len));
                             }
                         }
                     } catch (Exception e) {
@@ -103,7 +101,7 @@ public class ActivityFor extends AppCompatActivity {
         });
     }
 
-    public String createName_ver3(int len) {
+    public String createName_ver4(int len) {
         Random rand = new Random();
         StringBuilder newName = new StringBuilder();
         for(int i=0; i<len; i++){

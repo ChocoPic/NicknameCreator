@@ -19,25 +19,22 @@ import com.nick.nicknamecreator.service.SQLHelper;
 import java.util.ArrayList;
 
 public class ActivityMemo extends AppCompatActivity {
-    private Context context = this;
+    private final Context context = this;
     private TextView blankText;
-    private Button clear_btn;
     private SQLHelper helper;
-    private RecyclerView recyclerView;
     private RecyclerAdapter adapter;
-    private ArrayList<String> items;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_memo);
 
-        recyclerView = findViewById(R.id.memo_list);
+        RecyclerView recyclerView = findViewById(R.id.memo_list);
         blankText = (TextView)findViewById(R.id.text_blank);
-        clear_btn = (Button)findViewById(R.id.button_clear);
+        Button clear_btn = (Button) findViewById(R.id.button_clear);
 
         helper = new SQLHelper(this);
-        items = new ArrayList<>();
+        ArrayList<String> items = new ArrayList<>();
         items = loadDataList();
 
         LinearLayoutManager layout = new LinearLayoutManager(context);
