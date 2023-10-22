@@ -108,21 +108,20 @@ public class ActivityFor extends AppCompatActivity {
         StringBuilder newName = new StringBuilder();
         for(int i=0; i<len; i++){
             double AorB = Math.random();
-            if(i==len-1){
-                if(AorB > 0.1){
-                    //리스트에서 마지막글자 고르기
+            if(AorB > 0.1){ //한글자 배열에서 고름
+                if(i==0){
+                   newName.append(func.pickOne(data.FOR_ONE_FIRST_CNT, data.FOR_ONE_FIRST_TEXT));
+                }else if(i==len-1){
                     newName.append(func.pickOne(data.FOR_ONE_LAST_CNT, data.FOR_ONE_LAST_TEXT));
                 }else{
-                    //랜덤으로 마지막글자 만들기
-                    newName.append(func.createC(data.CHO_LAST, data.JUN_LAST, data.JON_LAST));
+                   newName.append(func.pickOne(data.FOR_ONE_CNT, data.FOR_ONE_TEXT));
                 }
-            }
-            else{
-                if(AorB > 0.1){
-                    //리스트에서 중간글자 고르기
-                    newName.append(func.pickOne(data.FOR_ONE_CNT, data.FOR_ONE_TEXT));
-                }else {
-                    //랜덤으로 중간글자 만들기
+            }else{  //랜덤으로 한글자 조합
+                if(i==0){
+                    newName.append(func.createC(data.CHO_FIRST, data.JUN_FIRST, data.JON_FIRST));
+                }else if(i==len-1){
+                    newName.append(func.createC(data.CHO_LAST, data.JUN_LAST, data.JON_LAST));
+                }else{
                     newName.append(func.createC(data.CHO, data.JUN, data.JON));
                 }
             }
@@ -131,7 +130,6 @@ public class ActivityFor extends AppCompatActivity {
 //        Log.i("단어생성완료",newName);
         return newName.toString();
     }
-
 
     // Toast 겹치지 않게 띄우는 함수
     public void showToast(String text){

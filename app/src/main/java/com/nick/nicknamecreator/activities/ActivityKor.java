@@ -105,16 +105,25 @@ public class ActivityKor extends AppCompatActivity {
         StringBuilder newName = new StringBuilder();
         for(int i=0; i<len; i++){
             double AorB = Math.random();
-            if(AorB > 0.3 && i < len-1){
-                //두글자 배열에서 고름
+            if(AorB > 0.3 && i < len-1){    //두글자 배열에서 고름
                 newName.append(func.pickTwo(data.KOR_TWO));
                 i++;
-            }else if(AorB > 0.1){
-                //한글자 배열에서 고름
-                newName.append(func.pickOne(data.KOR_ONE_CNT, data.KOR_ONE_TEXT));
-            }else{
-                //랜덤으로 한글자 조합
-                newName.append(func.createC(data.CHO, data.JUN, data.JON));
+            }else if(AorB > 0.1){   //한글자 배열에서 고름
+                if(i==0){
+                    newName.append(func.pickOne(data.KOR_ONE_FIRST_CNT, data.KOR_ONE_FIRST_TEXT));
+                }else if(len>2 && i==len-1){
+                    newName.append(func.pickOne(data.KOR_ONE_LAST_CNT, data.KOR_ONE_LAST_TEXT));
+                }else{
+                    newName.append(func.pickOne(data.KOR_ONE_CNT, data.KOR_ONE_TEXT));
+                }
+            }else{  //랜덤으로 한글자 조합
+                if(i==0){
+                    newName.append(func.createC(data.CHO_FIRST, data.JUN_FIRST, data.JON_FIRST));
+                }else if(len>2 && i==len-1){
+                    newName.append(func.createC(data.CHO_LAST, data.JUN_LAST, data.JON_LAST));
+                }else{
+                    newName.append(func.createC(data.CHO, data.JUN, data.JON));
+                }
             }
             //Log.i("단어생성중",i+newName);
         }
