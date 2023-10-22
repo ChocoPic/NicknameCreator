@@ -12,23 +12,23 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.nick.nicknamecreator.service.CombineFunc;
 import com.nick.nicknamecreator.service.MyData;
 import com.nick.nicknamecreator.ui.MemoPopup;
 import com.nick.nicknamecreator.R;
 import com.nick.nicknamecreator.service.SQLHelper;
 
-import java.io.Console;
 import java.util.Random;
 /*한글닉 랜덤*/
 public class ActivityKor extends AppCompatActivity {
 
     private final String CLEAR_OUTPUT_TEXT = "";
+    private static final int TVS = 16;
     private final int[] TV_ids = {R.id.tv1, R.id.tv2, R.id.tv3, R.id.tv4, R.id.tv5, R.id.tv6, R.id.tv7, R.id.tv8, R.id.tv9, R.id.tv10, R.id.tv11, R.id.tv12, R.id.tv13, R.id.tv14, R.id.tv15, R.id.tv16};
     private EditText et_length;
     private Button b_create;
     private TextView[] tvs = new TextView[TVS];
     private Button btn_memo;
-    private static final int TVS = 16;
     private Context context = this;
     private SQLHelper helper;
 
@@ -37,6 +37,7 @@ public class ActivityKor extends AppCompatActivity {
     static Toast toast;
 
     private final MyData data = new MyData();
+    private final CombineFunc func = new CombineFunc();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,7 +83,7 @@ public class ActivityKor extends AppCompatActivity {
                     showToast("숫자를 입력하세요");
                 } else {
                     try {
-                        Integer len = Integer.parseInt("" + et_length.getText());
+                        int len = Integer.parseInt("" + et_length.getText());
 
                         if (len < 1 || len > 8)
                             showToast("1~8글자만 가능합니다");
@@ -102,82 +103,34 @@ public class ActivityKor extends AppCompatActivity {
             }
         });
     }
-
     public String createName_ver3(int len) {
-        Random rand = new Random();
-        String newName = "";
+        StringBuilder newName = new StringBuilder();
         for(int i=0; i<len; i++){
             double AorB = Math.random();
             if(AorB > 0.3 && i < len-1){
                 //두글자 배열에서 고름
-                int a = rand.nextInt(data.KOR_TWO.length);
-                newName += data.KOR_TWO[a];
+                newName.append(func.pickTwo(data.KOR_TWO));
                 i++;
             }else if(AorB > 0.1){
                 //한글자 배열에서 고름
-                int a = rand.nextInt(data.KOR_ONE.length);
-                newName += data.KOR_ONE[a];
+                newName.append(func.pickOne(data.KOR_ONE_CNT, data.KOR_ONE_TEXT));
             }else{
                 //랜덤으로 한글자 조합
-                newName += createC();
+                newName.append(func.createC(data.CHO, data.JUN, data.JON));
             }
             //Log.i("단어생성중",i+newName);
         }
         //Log.i("단어생성완료",newName);
-        return newName;
+        return newName.toString();
     }
 
-    public String createC(){
-        char chr;
-        Random rand = new Random();
-        int a=0, b=0, c=0;
-        //랜덤 조합
-        int cho = rand.nextInt(10000);
-        int total = 0;
-        for(int i=0; i<data.CHO.length; i++){
-            int cur = data.CHO[i];
-            total += cur;
-            if (cho <= total){
-                a = i ;
-                break;
-            }
-        }
-        int jun = rand.nextInt(10000);
-        total = 0;
-        for(int i=0; i<data.JUN.length; i++){
-            int cur = data.JUN[i];
-            total += cur;
-            if (jun <= total){
-                b = i ;
-                break;
-            }
-        }
-        int jon = rand.nextInt(10000);
-        total = 0;
-        for(int i=0; i<data.JON.length; i++){
-            int cur = data.JON[i];
-            total += cur;
-            if (jon <= total){
-                c = i ;
-                break;
-            }
-        }
-        chr = (char)makeCh(a,b,c);
-        Log.d("랜덤",chr+":"+a+" "+b+" "+c);
-
-        return String.valueOf(chr);
-    }
-
-    public int makeCh(int a, int b, int c){
-        return (0xAC00 + 21*28*a +28*b + c);
-    }
-
+    // Toast 겹치지 않게 띄우는 함수
     public void showToast(String text){
-        if(toast==null){
-            toast = Toast.makeText(ActivityKor.this, text, Toast.LENGTH_SHORT);
-        }else{
-            toast.setText(text);
+        if(toast != null){
+            toast.cancel();
         }
-        toast.show();
+        Toast toast_new = Toast.makeText(ActivityKor.this, text, Toast.LENGTH_SHORT);
+        toast_new.show();
+        toast = toast_new;
     }
 }

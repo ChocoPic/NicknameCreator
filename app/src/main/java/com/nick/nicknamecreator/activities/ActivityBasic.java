@@ -3,6 +3,7 @@ package com.nick.nicknamecreator.activities;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,11 +12,11 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.nick.nicknamecreator.service.CombineFunc;
+import com.nick.nicknamecreator.service.MyData;
 import com.nick.nicknamecreator.ui.MemoPopup;
 import com.nick.nicknamecreator.R;
 import com.nick.nicknamecreator.service.SQLHelper;
-
-import java.util.Random;
 
 /*기본 랜덤*/
 public class ActivityBasic extends AppCompatActivity
@@ -34,10 +35,12 @@ public class ActivityBasic extends AppCompatActivity
     private SQLHelper helper;
 
     static final int LEN = 5;
-    char userInput[] = new char[LEN];
+    char[] userInput = new char[LEN+1];
     String userInputString;
     static int clicked = 0;
     static Toast toast;
+    private static final MyData data = new MyData();
+    private final CombineFunc func = new CombineFunc();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,7 +108,9 @@ public class ActivityBasic extends AppCompatActivity
                 userInput[2] = saveInput(n3.getText().toString());
                 userInput[3] = saveInput(n4.getText().toString());
                 userInput[4] = saveInput(n5.getText().toString());
+                userInput[5] = '\n';
                 userInputString = String.valueOf(userInput);
+                Log.d("유저입력", userInputString);
 
                 try{
                     if(et_length.getText().toString().equals("")){
@@ -113,7 +118,7 @@ public class ActivityBasic extends AppCompatActivity
                     }
                     else {
                         try {
-                            Integer len = Integer.parseInt("" + et_length.getText());
+                            int len = Integer.parseInt("" + et_length.getText());
                             if ( len < 1 || len > 5)
                                 showToast("1~5글자까지 가능합니다");
                             else {
@@ -134,29 +139,15 @@ public class ActivityBasic extends AppCompatActivity
             }
         });
     }
-    public String createName(int len, String user){             //마지막 글자 확률 다르게
-        Random rand = new Random();
-    //ㄱ초성(50)
-        //int cho_range_last[] = {0, 1, 2, 2, 2, 2, 2, 2, 3, 3, 4, 3, 3, 3, 3, 4, 5, 6, 7, 8, 9, 9, 9, 9, 9, 9, 9, 9, 10, 11, 11, 11, 11, 12, 12, 13, 14, 14, 14, 15, 15, 15, 16, 16, 16, 17, 18, 18, 18, 5};
-        int cho_range_first[] = {0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15, 16, 16, 17, 17, 18, 18, 2, 3, 8, 11, 18, 12, 16, 15, 5, 9, 18, 11};
-       // int cho_range[] = {0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 5, 5, 5, 5, 5, 5, 5, 5, 6, 6, 6, 6, 7, 9, 9, 11, 11, 11, 11, 11, 11, 11, 12, 14, 14, 15, 16, 17, 18, 2, 2, 2, 2, 2, 5, 5, 5, 5, 5};
-    //ㅏ중성(50)
-        int jun_range_e[] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 18, 18, 18, 18, 18, 18, 18, 18, 20, 20, 20, 20, 20, 20, 20, 20, 1, 4, 5, 6, 7, 9, 10, 11, 14, 5, 19, 0, 19, 17, 17};
-        int jun_range_o[] = {20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 4, 4, 4, 4, 4, 4, 0, 0, 0, 0, 0, 0, 8, 8, 8, 18, 18, 18, 18, 18, 18, 21, 21, 8, 8, 1, 1, 2, 4, 5, 5, 6, 14, 20, 20, 19, 19, 20, 8, 4};
-    //ㅇ종성(50)
-        int jon_range_last[] = {4, 4, 4, 4, 4, 4, 4, 4, 16, 16, 16, 16, 16, 16, 16, 16, 19, 19, 19, 19, 19, 19, 19, 21, 21, 21, 21, 21, 21, 21, 21, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 21, 16, 8, 8, 4, 4, 4, 4, 4};
-        int jon_range[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 4, 4, 4, 8, 8, 8, 8, 16, 16, 16, 16, 17, 19, 21, 21, 0, 0, 0, 0, 0, 0, 0, 0};
-        int jon_range_first[] = {4, 4, 4, 4, 4, 4, 4, 4, 16, 16, 16, 16, 16, 16, 16, 16, 8, 8, 8, 8, 8, 19, 19, 21, 21, 21, 21, 1, 21, 21, 16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 21, 16, 8, 8, 4, 4, 4, 4, 4};
-
-        char nameArr[] = new char[LEN+1];
-
+    public StringBuilder createName(int len, String user){             //마지막 글자 확률 다르게
+        StringBuilder name = new StringBuilder();
         int j=0;
         int a, b, c;
         int cho;
         for(j=0 ; j<len ; j++) {
             switch (user.charAt(j)){
-                case ' ' : cho=19; break;  //EX) " "
-                case 'ㄱ': cho=0; break;    //EX) ㄱ
+                case ' ' : cho=20; break;  //입력안한경우
+                case 'ㄱ': cho=0; break;    //초성입력
                 case 'ㄲ': cho=1; break;
                 case 'ㄴ': cho=2; break;
                 case 'ㄷ': cho=3; break;
@@ -175,51 +166,59 @@ public class ActivityBasic extends AppCompatActivity
                 case 'ㅌ': cho=16; break;
                 case 'ㅍ': cho=17; break;
                 case 'ㅎ': cho=18; break;
-                default: cho=-1;    //EX) 각
+                default: cho=-1;    //완성된 글자 입력
             };
-            int jun = rand.nextInt(50);
-            int jon = rand.nextInt(50);
-            if(cho!=(-1)){//EX) ㄱ, " "
-                if(j==0){               //첫글자
-                    b = jun_range_e[jun]; c = jon_range_first[jon];
-                    if(cho==19) a = cho_range_first[rand.nextInt(50)];
-                    else a = cho;
+
+            if(cho!=(-1)){//입력이 없거나 초성인 경우
+                if(j==0){//첫글자
+                    if(cho != 20){
+                        name.append(func.createC(new int[]{cho}, data.JUN_FIRST, data.JON_FIRST));
+                    }else{
+                        name.append(func.createC(data.CHO_FIRST, data.JUN_FIRST, data.JON_FIRST));
+                    }
                 }
-                else if(j==len-1 && len>3){      //마지막글자
-                    b = jun_range_e[jun]; c = jon_range_last[jon];
-                    if(cho==19) a = cho_range_first[rand.nextInt(50)];
-                    else a = cho;
+                else if(j==len-1 && len>3){//마지막글자
+                    if(cho != 20){
+                        name.append(func.createC(new int[]{cho}, data.JUN_LAST, data.JON_LAST));
+                    }else{
+                        name.append(func.createC(data.CHO_LAST, data.JUN_LAST, data.JON_LAST));
+                    }
                 }
-                else{                   //나머지글자
-                    b = jun_range_o[jun]; c = jon_range[jon];
-                    if(cho==19) a = cho_range_first[rand.nextInt(50)];
-                    else a = cho;
+                else{//나머지글자
+                    if(cho != 20){
+                        name.append(func.createC(new int[]{cho}, data.JUN, data.JON));
+                    }else{
+                        name.append(func.createC(data.CHO, data.JUN, data.JON));
+                    }
                 }
-                nameArr[j] = (char)(0xAC00 + 21*28*(a) + 28*(b) + (c));
             }
-            else {//EX) 각
-                nameArr[j]=user.charAt(j);
+            else {// 완성된 글자를 입력한 경우
+                name.append(user.charAt(j));
             }
             //nameArr[LEN] = '\n';
         }
-        String namesArr = String.valueOf(nameArr);
-
-        return namesArr;
+        return name;
     }
 
     public char saveInput(String s){
         char c;
-        if(s.isEmpty()){c = ' ';}
-        else{c = s.charAt(0);}
+        if(s.isEmpty()){
+            c = ' ';
+        }
+        else{
+            c = s.charAt(0);
+        }
         return c;
     }
+
+    // Toast 겹치지 않게 띄우는 함수
     public void showToast(String text){
-        if(toast==null){
-            toast = Toast.makeText(ActivityBasic.this, text, Toast.LENGTH_SHORT);
-        }else{
-            toast.setText(text);
+        if(toast != null){
+            toast.cancel();
         }
-        toast.show();
+        Toast toast_new = Toast.makeText(ActivityBasic.this, text, Toast.LENGTH_SHORT);
+        toast_new.show();
+        toast = toast_new;
     }
 }
 
