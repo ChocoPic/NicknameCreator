@@ -108,8 +108,8 @@ public class MainActivity extends AppCompatActivity {
     private void loadAd(){
         AdRequest adRequest = new AdRequest.Builder().build();
         InterstitialAd.load(this,
-                //getString(R.string.admob_ad_unit_id),
-                getString(R.string.admob_test),//테스트 광고 로드해보기
+                getString(R.string.admob_ad_unit_id),
+//                getString(R.string.admob_test),//테스트 광고 로드해보기
                 adRequest,
                 new InterstitialAdLoadCallback() {
                     @Override
